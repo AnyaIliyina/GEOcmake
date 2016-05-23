@@ -94,11 +94,6 @@ private slots:
 	\param const QItemSelection & - старое выделение*/
 	void slotForSearch(const QItemSelection &, const QItemSelection &);
 	
-	/*!
-	Начинает сессию для пользователя user_id
-	\param  user_id - идентификатор пользователя */
-	void slotStartSession(int user_id);
-
 	/*! Ставит галочки в чек-боксах *treeSites, 
 	когда в *tableSites выделен один сайт
 	\param int id - id выделенного сайта */

@@ -27,21 +27,15 @@ set(SRC_H
 	src/core/Department.h
 	src/core/DepartmentRegion.h
 	src/core/DepartmentType.h
-	src/core/Format.h
 	src/core/GeodataType.h
 	src/core/Language.h
 	src/core/Log.h
 	src/core/Region.h
-	src/core/Scale.h
-	src/core/Session.h
 	src/core/Site.h
 	src/core/SiteLang.h
 	src/core/SiteRegion.h
 	src/core/SiteType.h
-	src/core/State.h
-	src/core/Status.h
-	src/core/User.h
-	src/core/Usertype.h
+	
 	
 	src/model/Base_item.h
 	src/model/Departments.h
@@ -69,21 +63,14 @@ set(SRC_C
 	src/core/Department.cpp
 	src/core/DepartmentRegion.cpp
 	src/core/DepartmentType.cpp
-	src/core/Format.cpp
 	src/core/GeodataType.cpp
 	src/core/Language.cpp
 	src/core/Log.cpp
 	src/core/Region.cpp
-	src/core/Scale.cpp
-	src/core/Session.cpp
 	src/core/Site.cpp
 	src/core/SiteLang.cpp
 	src/core/SiteRegion.cpp
 	src/core/SiteType.cpp
-	src/core/State.cpp
-	src/core/Status.cpp
-	src/core/User.cpp
-	src/core/Usertype.cpp
 	
 	src/model/Base_item.cpp
 	src/model/Departments.cpp

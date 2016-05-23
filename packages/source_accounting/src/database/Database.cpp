@@ -1,13 +1,6 @@
 #include "Database.h"
 #include "Department.h"
-#include "Format.h"
-#include "State.h"
-#include "Scale.h"
 #include "SiteLang.h"
-#include "User.h"
-#include "Status.h"
-#include "Session.h"
-#include "Usertype.h"
 #include "Log.h"
 #include "GeodataType.h"
 #include "Site.h"
@@ -110,29 +103,11 @@ QSqlDatabase Database::database()
 */
 void Database::configure()
 {
-		Usertype::createTable();
-		Usertype::completeTable();
-		User::createTable();
-		User::completeTable();
 		Log::createTable();
-		Session::createTable();
-		Session::completeTable();
 		Language::createTable();
 		Language::completeTable();
 		Site::createTable();
 		Site::completeTable();
-		Format::createTable();
-		Format::completeTable();
-		State::createTable();
-		State::completeTable();
-		Scale::createTable();
-		Scale::completeTable();
-		Status::createTable();
-		Status::completeTable();
-		//Geodata_record::createTable();
-		// Geodata_record::completeTable();
-		GeodataType::createTable();
-		GeodataType::completeTable();
 		Department::createTable();
 		Department::completeTable();
 		Region::createTable();
@@ -142,6 +117,8 @@ void Database::configure()
 
 void Database::createBridgeTables()
 {
+	GeodataType::createTable();
+	GeodataType::completeTable();
 	SiteRegion::createTable();
 	SiteLang::createTable();
 	SiteType::createTable();

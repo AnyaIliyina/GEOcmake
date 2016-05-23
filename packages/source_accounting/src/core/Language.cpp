@@ -1,6 +1,5 @@
 #include "Language.h"
 #include "Database.h"
-#include "Scale.h"
 #include <QString>
 
 bool Language::createTable()

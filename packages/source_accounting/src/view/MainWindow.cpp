@@ -1,13 +1,10 @@
 #include "MainWindow.h"
-#include "Session.h"
 #include "Site.h"
-#include "User.h"
 #include "ViewSites.h"
 #include "ViewDepartments.h"
 #include "TreeRegions.h"
 #include "SiteRegion.h"
 #include "DepartmentRegion.h"
-#include "State.h"
 #include "Database.h"
 #include "Types.h"
 #include <QTextEdit>
@@ -56,11 +53,6 @@ void MainWindow::slotConfigure()
 }
 
 
-void MainWindow::slotStartSession(int user_id)
-{
-	Session::createSession(user_id);
-	slotConfigure();
-}
 
 void MainWindow::slotSelectRegionSite(int id)
 {

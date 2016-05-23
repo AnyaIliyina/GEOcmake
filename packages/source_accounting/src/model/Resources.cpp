@@ -1,6 +1,5 @@
 #include "Resources.h"
 #include "Database.h"
-#include "State.h"
 #include "Site.h"
 #include "Language.h"
 #include "SiteLang.h"

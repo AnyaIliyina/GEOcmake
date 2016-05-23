@@ -1,14 +1,11 @@
 #include "ViewSites.h"
 #include "Database.h"
-#include "Scale.h"
-#include "State.h"
 #include "GeodataType.h"
 #include "Types.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
 #include "Language.h"
-#include "Session.h"
 #include <QApplication>
 #include <QMainWindow>
 #include <QSqlTableModel>

@@ -1,14 +1,9 @@
 #include "ViewDepartments.h"
 #include "Database.h"
-#include "Scale.h"
-#include "State.h"
-#include "Geodata_record.h"
 #include "GeodataType.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"
 #include "Site.h"
-#include "Format.h"
-#include "Session.h"
 #include "Types.h"
 #include <QApplication>
 #include <QMainWindow>
