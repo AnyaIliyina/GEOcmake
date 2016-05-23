@@ -1,5 +1,0 @@
-C:/Diplom/GEOcmake/build/CMakeFiles/ALL_BUILD.dir
-C:/Diplom/GEOcmake/build/CMakeFiles/ZERO_CHECK.dir
-C:/Diplom/GEOcmake/build/packages/CMakeFiles/ALL_BUILD.dir
-C:/Diplom/GEOcmake/build/packages/source_accounting/CMakeFiles/source_accounting.dir
-C:/Diplom/GEOcmake/build/packages/source_accounting/CMakeFiles/ALL_BUILD.dir
