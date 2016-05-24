@@ -22,6 +22,7 @@ set(SRC_H
 	src/view/TreeRegions.h
 	src/view/ViewDepartments.h
 	src/view/ViewSites.h
+	src/view/test_delegate.h
 	
 		
 	src/core/Department.h
@@ -59,6 +60,7 @@ set(SRC_C
 	src/view/TreeRegions.cpp
 	src/view/ViewDepartments.cpp
 	src/view/ViewSites.cpp
+	src/view/test_delegate.cpp
 	
 	src/core/Department.cpp
 	src/core/DepartmentRegion.cpp
