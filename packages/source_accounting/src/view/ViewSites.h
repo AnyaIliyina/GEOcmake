@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ui_ViewSites.h"
 #include "Item_model.h"
 #include "Combo_delegate.h"

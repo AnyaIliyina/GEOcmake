@@ -1,4 +1,4 @@
-﻿#include "SiteType.h"
+#include "SiteType.h"
 
 SiteType::SiteType(int site_id, int type_id):
 	m_site_id(site_id), m_type_id(type_id)

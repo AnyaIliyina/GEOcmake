@@ -1,4 +1,4 @@
-﻿#include "SiteRegion.h"
+#include "SiteRegion.h"
 
 void SiteRegion::deleteRecord(int session_id)
 {

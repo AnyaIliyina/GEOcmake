@@ -1,4 +1,4 @@
-﻿#pragma once
+#pragma once
 #include "ui_ViewDepartments.h"
 #include "Item_model.h"
 #include <QApplication>

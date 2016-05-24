@@ -1,4 +1,4 @@
-﻿#include "DepartmentRegion.h"
+#include "DepartmentRegion.h"
 
 DepartmentRegion::DepartmentRegion(int department_id, int region_id):
 	m_department_id(department_id), m_region_id(region_id)
