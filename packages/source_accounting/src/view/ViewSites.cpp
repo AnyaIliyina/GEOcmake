@@ -14,8 +14,6 @@
 #include <QDesktopServices>
 #include <QUrl>
 
-#include "test_delegate.h"
-
 
 ViewSites::ViewSites(QWidget * parent): ui(new Ui::ViewSites) // ??
 {
@@ -59,16 +57,11 @@ void ViewSites::backToTab()
 
 void ViewSites::createTable()
 {
-	/*comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
-	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);*/
-
-	auto td = new TestDelegate(Language::getList(), this);
-	ui->tableView->setItemDelegateForColumn(3, td);
-
+	comboDelegateLanguage = new ComboDelegate(Language::getList(), this);
+	ui->tableView->setItemDelegateForColumn(3, comboDelegateLanguage);
 
 	comboDelegateGPI = new ComboDelegate(GeodataType::getList(), this);
 	ui->tableView->setItemDelegateForColumn(4, comboDelegateGPI);
-
 
 	ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
 	ui->tableView->setColumnHidden(0, true);

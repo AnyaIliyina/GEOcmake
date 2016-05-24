@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>GeoProject</string>
+   <string>Программа ведения источников КМ в мировых сетях. ШДФИ.30571-01</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">

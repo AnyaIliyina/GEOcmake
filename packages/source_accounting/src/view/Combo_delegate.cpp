@@ -3,6 +3,7 @@
 #include "ViewSites.h"
 
 #include <QComboBox>
+#include <QListView>
 
 ComboDelegate::~ComboDelegate() {
 };
@@ -20,6 +21,7 @@ QWidget* ComboDelegate::createEditor(
 	for (int i = 0; i < m_list.count(); i++) {
 		cBox->addItem(m_list[i]);
 	}
+	cBox->setView(new QListView);
 	
 	return cBox;
 }
