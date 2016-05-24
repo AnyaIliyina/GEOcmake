@@ -284,7 +284,7 @@ QStringList Site::getSiteNames()
 	return listSites;
 }
 
-bool Site::urlFromString(QString & string)
+bool Site::urlFromString(const QString& string)
 {
 	const QString urlStr = string.trimmed();
 	const QRegExp qualifiedUrl(QLatin1String("(http|ftp|https):\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?"));

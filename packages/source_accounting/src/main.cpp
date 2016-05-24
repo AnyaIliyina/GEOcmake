@@ -1,5 +1,5 @@
 #include <QApplication>
-#include <qDebug>
+#include <QDebug>
 #include <QTranslator>
 #include <QDir>
 #include <QStandardPaths>

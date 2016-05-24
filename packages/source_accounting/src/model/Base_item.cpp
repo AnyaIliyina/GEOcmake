@@ -1,4 +1,4 @@
-#include "base_item.h"
+#include "Base_item.h"
 #include <QDebug>
 BaseItem::~BaseItem() {
 	qDeleteAll(m_children);

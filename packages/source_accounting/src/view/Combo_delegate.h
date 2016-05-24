@@ -1,9 +1,9 @@
 /*!
 
 	\file
-	\brief Делегат ComboBox
-	\author Козырева О.А.
-	\date Май 2016
+	\brief Р”РµР»РµРіР°С‚ ComboBox
+	\author РљРѕР·С‹СЂРµРІР° Рћ.Рђ.
+	\date РњР°Р№ 2016
 
 */
 
@@ -20,20 +20,20 @@ class ComboDelegate : public QItemDelegate
 public:
 	~ComboDelegate();
 	/*!
-	Конструктор
-	\param const QList<QString>& list - список, для установки элементов комбо-боксов
+	РљРѕРЅСЃС‚СЂСѓРєС‚РѕСЂ
+	\param const QList<QString>& list - СЃРїРёСЃРѕРє, РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё СЌР»РµРјРµРЅС‚РѕРІ РєРѕРјР±Рѕ-Р±РѕРєСЃРѕРІ
 	*/
 	ComboDelegate(const QList<QString>& list, QObject* parent = NULL);
 	/*!
-	Метод для установки элементов комбо-бокса
+	РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё СЌР»РµРјРµРЅС‚РѕРІ РєРѕРјР±Рѕ-Р±РѕРєСЃР°
 	*/
 	QWidget* createEditor(QWidget* parent, const QStyleOptionViewItem& option, const QModelIndex& index) const;
 	/*!
-	Метод для установки выделенных элементов
+	РњРµС‚РѕРґ РґР»СЏ СѓСЃС‚Р°РЅРѕРІРєРё РІС‹РґРµР»РµРЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ
 	*/
 	void setEditorData(QWidget *editor, const QModelIndex &index) const;
 	/*!
-	Метод для сохранения выбранных элементов, после завершения работы с делегатом
+	РњРµС‚РѕРґ РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІС‹Р±СЂР°РЅРЅС‹С… СЌР»РµРјРµРЅС‚РѕРІ, РїРѕСЃР»Рµ Р·Р°РІРµСЂС€РµРЅРёСЏ СЂР°Р±РѕС‚С‹ СЃ РґРµР»РµРіР°С‚РѕРј
 	*/
 	void setModelData(QWidget *editor, QAbstractItemModel *model, const QModelIndex &index) const;
 private:

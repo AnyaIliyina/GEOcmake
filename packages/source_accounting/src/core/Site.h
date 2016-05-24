@@ -152,7 +152,7 @@ public:
 	 /*!
 	 Проверяет url на валидность
 	 */
-	 static bool urlFromString(QString &string);
+	 static bool urlFromString(const QString& string);
 
 	 /*!
 	 Удаляет запись по ее id;

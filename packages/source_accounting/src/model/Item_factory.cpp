@@ -1,7 +1,7 @@
-#include "item_factory.h"
+#include "Item_factory.h"
 #include "Resources.h"
 #include "Departments.h"
-#include "types.h"
+#include "Types.h"
 #include "RegionItem.h"
 #include "RegionItemChecked.h"
 
