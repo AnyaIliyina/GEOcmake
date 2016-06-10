@@ -1,4 +1,4 @@
-
+﻿
 cmake_minimum_required(VERSION 2.6)
 # Задание атрибутов приложения/проекта
 set(PRJ_NAME geo)
@@ -24,6 +24,9 @@ set(CMAKE_LIBRARY_OUTPUT_DIRECTORY_RELEASE ${GEODEV_INSTALL_PATH})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${GEODEV_INSTALL_PATH})
 #set(EXECUTABLE_OUTPUT_PATH ${GEODEV_INSTALL_PATH})
 #set(LIBRARY_OUTPUT_PATH ${GEODEV_INSTALL_PATH})
+
+file(COPY "packages/source_accounting/src/resources/txt/gpi.txt" DESTINATION ../bin)
+file(COPY "packages/source_accounting/src/resources/txt/languages.txt" DESTINATION ../bin)
 
 if(MSVC)
 set(LINK_TYPE SHARED)
