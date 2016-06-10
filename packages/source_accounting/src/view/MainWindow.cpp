@@ -287,6 +287,7 @@ void MainWindow::slotGetCheckSite()
 {
 	qDebug() << QObject::connect(treeSites->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)));
+	treeSites->selectionModel()->clear();
 }
 
 void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSelection &)
@@ -319,12 +320,14 @@ void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 			}
 		}
 	}
+	m_regionsChecked->save();
 }
 
 void MainWindow::slotGetCheckDepartment()
 {
 	qDebug() << QObject::connect(treeDepartments->selectionModel(), SIGNAL(selectionChanged(const QItemSelection &, const QItemSelection &)),
 		this, SLOT(slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)));
+	treeDepartments->selectionModel()->clear();
 }
 
 void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)
@@ -357,6 +360,7 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 			}
 		}
 	}
+	m_regionsChecked->save();
 }
 
 void MainWindow::slotSyncTabs(int tabIndex)
