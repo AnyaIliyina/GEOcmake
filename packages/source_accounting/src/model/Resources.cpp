@@ -57,6 +57,27 @@ QVariant Resources::data(int column, int role) const{
 		
 		return m_id;
 	}
+	if (role == Qt::BackgroundRole) {
+		QBrush brush(Qt::cyan);
+		return brush;
+	}
+
+	// возвращает индикатор обязательного поля
+	if (role == Qt::DecorationRole && !isValid()) {
+		QPixmap pixmap(":/./images/error_small.png");
+		if (column == 1)
+			if (m_name.isNull() || m_name.isEmpty())
+				return pixmap;
+		if (column == 2)
+			if (m_url.isNull() || m_url.isEmpty())
+				return pixmap;
+		if (column == 3)
+			if (m_language.isNull() || m_language.isEmpty())
+				return pixmap;
+		if (column == 4)
+			if (m_gpi.isNull() || m_gpi.isEmpty())
+				return pixmap;
+	}
 
 	return QVariant();
 };

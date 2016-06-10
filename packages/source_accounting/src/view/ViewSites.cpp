@@ -70,7 +70,7 @@ void ViewSites::createTable()
 
 	ui->tableView->setColumnWidth(1, 120);
 	ui->tableView->setColumnWidth(2, 300);
-	ui->tableView->setColumnWidth(3, 200);
+	ui->tableView->setColumnWidth(3, 400);
 	ui->tableView->setColumnWidth(4, 300);
 	ui->tableView->setColumnWidth(5, 300);
 

@@ -59,6 +59,36 @@ QVariant Departments::data(int column, int role) const{
 		
 		return m_id;
 	}
+	if (role == Qt::BackgroundRole) {
+		QBrush brush(Qt::cyan);
+		return brush;
+	}
+
+	// возвращает индикатор обязательного поля
+	if (role == Qt::DecorationRole && !isValid()) {
+		QPixmap pixmap(":/./images/error_small.png");
+		if (column == 1)
+			if (m_name.isNull() || m_name.isEmpty())
+				return pixmap;
+		if (column == 2)
+			if (m_country.isNull() || m_country.isEmpty())
+				return pixmap;
+		if (column==3)
+			if (m_address.isNull() || m_address.isEmpty())
+				return pixmap;
+		if (column==4)
+			if (m_phone.isNull() || m_phone.isEmpty())
+				return pixmap;
+		if(column==5)
+			if (m_fax.isNull() || m_fax.isEmpty())
+				return pixmap;
+		if (column==6)
+			if (m_email.isNull() || m_email.isEmpty())
+				return pixmap;
+		if (column==7)
+			if (m_gpi.isNull() || m_gpi.isEmpty())
+				return pixmap;
+	}
 
 	return QVariant();
 };

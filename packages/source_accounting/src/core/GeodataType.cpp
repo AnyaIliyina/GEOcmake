@@ -4,6 +4,7 @@
 #include <QSqlQuery>
 #include <QDebug>
 #include <QSqlError>
+#include <QApplication>
 bool GeodataType::createTable()
 {
 	QSqlDatabase db = Database::database();
@@ -25,11 +26,26 @@ bool GeodataType::createTable()
 
 bool GeodataType::completeTable()
 {
-	QStringList typeNames;
-	typeNames << "аэрофотоснимки"
-		<< "картографические материалы"
-		<< "данные дистанционного зондирования";
-	return insert(typeNames);
+	auto str = QApplication::applicationDirPath() + "/gpi.txt";
+	QFile file(str);
+	QStringList gpi;
+	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		while (!file.atEnd())
+		{
+			//читаем строку
+			QString str = file.readLine();
+			str.chop(1);
+			gpi << str;
+		}
+
+	}
+	else
+	{
+		qDebug() << "Error:: file gpi.txt not open!";
+	}
+
+	return insert(gpi);
 }
 
 bool GeodataType::insert(QStringList typeNames)

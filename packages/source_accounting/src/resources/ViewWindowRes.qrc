@@ -12,6 +12,7 @@
     <file>./images/plus.png</file>
     <file>./images/share2.png</file>
     <file>./images/trash.png</file>
+    <file>./images/error_small.png</file>
     <file>./translations/qt_ru.qm</file>
     <file>./translations/qtbase_ru.qm</file>
     <file>./translations/qtscript_ru.qm</file>

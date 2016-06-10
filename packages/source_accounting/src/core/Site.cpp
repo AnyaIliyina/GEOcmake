@@ -234,11 +234,7 @@ bool Site::createTable()
 
 bool Site::completeTable()
 {
-		QList<Site> sites;
-	sites << Site("http://beryllium.gis-lab.info/project/osmshp", "gis-lab.info")
-		<< Site("http://www.afanas.ru/mapbase/", "afanas.ru")
-		<< Site("http://download.geofabrik.de/index.html", "geofabrik.de");
-	return insert(sites);
+	return true;
 }
 
 QList<int> Site::languageIDs()

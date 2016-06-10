@@ -1,7 +1,7 @@
 #include "Language.h"
 #include "Database.h"
 #include <QString>
-
+#include <QApplication>
 bool Language::createTable()
 {
 	QSqlDatabase db = Database::database();
@@ -23,9 +23,27 @@ bool Language::createTable()
 
 bool Language::completeTable()
 {
+	auto str = QApplication::applicationDirPath() + "/languages.txt";
+	QFile file(str);
 	QStringList languages;
-	languages << "русский" << "английский" << "французский" << "немецкий";
+	if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+	{
+		while (!file.atEnd())
+		{
+			//читаем строку
+			QString str = file.readLine();
+			str.chop(1);
+			languages << str;			
+		}
+
+	}
+	else
+	{
+		qDebug() << "Error:: file languages.txt not open!";
+	}
+	
 	return insert(languages);
+	
 }
 
 bool Language::insert(QStringList languageNames)
