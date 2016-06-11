@@ -314,7 +314,7 @@ void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 				int region_id = map.keys().at(i);
 				SiteRegion *site_reg = new SiteRegion(id, region_id);
 
-				if (map.values().at(i)->checkState() == Qt::Checked)	//галочку поставили
+				if (map.values().at(i)->checkState() != Qt::Unchecked)	//галочку поставили
 					site_reg->insertIntoDatabase();
 				else
 					site_reg->deleteRecord();
@@ -355,7 +355,7 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 				int region_id = map.keys().at(i);
 
 				DepartmentRegion *dep_reg = new DepartmentRegion(id, region_id);
-				if (map.values().at(i)->checkState() == Qt::Checked)	//галочку поставили
+				if (map.values().at(i)->checkState() != Qt::Unchecked)	//галочку поставили
 					dep_reg->insertIntoDatabase();
 				else
 					dep_reg->deleteRecord();

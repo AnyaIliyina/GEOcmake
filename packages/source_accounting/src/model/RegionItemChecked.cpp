@@ -60,8 +60,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 	{
 			m_checked = (Qt::CheckState)value.toInt();
 			checkChildren(this, m_checked);
-			//qDebug() << "emit";
-			//emit signalChanged();
+			dynamic_cast<RegionItemChecked*>(m_parent)->update();
 	}
 	return true;
 }
