@@ -4,6 +4,7 @@
 #include "RegionItem.h"
 #include "Item_factory.h"
 #include <QModelIndex>
+#include <QObject>
 /*!
 
 \file
@@ -13,9 +14,7 @@
 \date май 2016
 */
 
-class RegionItemChecked : public RegionItem
-{
-
+class RegionItemChecked : public RegionItem{
 public:
 	RegionItemChecked();
 	virtual ~RegionItemChecked();
@@ -57,12 +56,12 @@ public:
 	static QMap<int, RegionItemChecked*> getMap();
 
 	/*! Устанавливает значение m_checked
-	\param bool checked - новое значение m_checked*/
-	void setChecked(bool checked);
+	\param int checked - новое значение m_checked*/
+	void setChecked(int checked);
 	
 	/*! Возвращает значение m_checked
-	\return bool m_checked */
-	bool isChecked();
+	\return int m_checked */
+	int checkState();
 
 	/*! Выводит элементы из режима редактирования
 	\return true - значение m_checked изменилось за время редактирования
@@ -71,16 +70,22 @@ public:
 
 	/*! Присваивает полю m_checked всех айтемов значение false*/
 	void uncheckAll();
+	void update();
+
+//	QList<RegionItemChecked*> children();
 
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
 	\param RegionItemChecked* parent - элемент
-	\param bool newCheckState - новое значение m_checked*/
-	void checkChildren(RegionItemChecked* parent, bool newCheckState);
+	\param int newCheckState - новое значение m_checked*/
+	void checkChildren(RegionItemChecked* parent, int newCheckState);
 	
-	bool m_checked=true;	// Элемент отмечен/не отмечен - состояние чек-бокса
-	bool m_old_checked;		// Предыдущее состояние чек-бокса
+	int m_checked=Qt::Unchecked;	// Элемент отмечен/не отмечен - состояние чек-бокса
+	int m_old_checked;		// Предыдущее состояние чек-бокса
+	
 	static QMap<int, RegionItemChecked*> map;	// QMap вида <"m_id региона", "указатель на item региона">
 	
 	RegionItemChecked* rootItem();	
+//signals:
+//	void signalChanged();
 };

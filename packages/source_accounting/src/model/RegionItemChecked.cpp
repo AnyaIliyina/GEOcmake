@@ -31,7 +31,7 @@ QVariant RegionItemChecked::data(int column, int role) const
 
 	if (role == Qt::CheckStateRole)
 		if (column == 0)
-			return m_checked ? Qt::Checked : Qt::Unchecked;
+			return m_checked;
 
 	return QVariant();
 };
@@ -58,8 +58,10 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 		return false;
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
-			m_checked = ((Qt::CheckState)value.toInt() == Qt::Checked) ? true : false;
+			m_checked = (Qt::CheckState)value.toInt();
 			checkChildren(this, m_checked);
+			//qDebug() << "emit";
+			//emit signalChanged();
 	}
 	return true;
 }
@@ -67,8 +69,8 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 
 RegionItemChecked::RegionItemChecked() : RegionItem()
 {
-	m_checked = false;
-	m_old_checked = false;
+	m_checked = Qt::Unchecked;
+	m_old_checked = Qt::Unchecked;
 }
 
 QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
@@ -76,7 +78,7 @@ QMap<int, RegionItemChecked*> RegionItemChecked::getMap()
 	return map;
 }
 
-void RegionItemChecked::setChecked(bool checked)
+void RegionItemChecked::setChecked(int checked)
 {
 	m_checked = checked;
 	m_old_checked = checked;
@@ -92,7 +94,7 @@ RegionItemChecked* RegionItemChecked::rootItem() {
 		return parent->rootItem();
 };
 
-bool RegionItemChecked::isChecked()
+int RegionItemChecked::checkState()
 {
 	return m_checked;
 }
@@ -102,7 +104,31 @@ void RegionItemChecked::uncheckAll()
 	checkChildren(rootItem(), false);
 }
 
-void RegionItemChecked::checkChildren(RegionItemChecked * parent, bool newCheckState)
+void RegionItemChecked::update()
+{
+	if (!this->hasChildren())
+		return;
+	this->m_checked = Qt::Unchecked;
+	int checkedChild_counter = 0;
+	for (int i = 0; i < this->m_children.count(); i++)
+	{
+		auto child = dynamic_cast<RegionItemChecked*>(this->m_children.at(i));
+		if (child->m_checked == Qt::Checked)
+			checkedChild_counter++;
+	}
+	
+	if (checkedChild_counter > 0)
+		m_checked = (checkedChild_counter == this->m_children.count()) ? Qt::Checked : Qt::PartiallyChecked;
+}
+
+//QList<RegionItemChecked*> RegionItemChecked::children()
+//{
+//	QList<RegionItemChecked*> list;
+//	list << this->children();
+//	return list;
+//}
+
+void RegionItemChecked::checkChildren(RegionItemChecked * parent, int newCheckState)
 {
 	parent->m_checked = newCheckState;
 	if (parent->hasChildren())

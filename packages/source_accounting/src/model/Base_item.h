@@ -12,8 +12,8 @@
 #include <QList>
 #include <QVariant>
 
-class BaseItem
-{
+
+class BaseItem{
 public:
 	virtual ~BaseItem();
 	BaseItem();

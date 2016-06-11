@@ -149,6 +149,8 @@ private slots:
 
 	/*! Включает treeDepartments и удаляет галочки в чек-боксах*/
 	void slotUncheckTreeDepartments();
+
+	void slotSetTreesFocused();
 };
 
 

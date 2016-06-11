@@ -259,7 +259,12 @@ bool ItemModel::cancel() {
 		m_editedItem = NULL;
 
 	return true;
-};
+}
+BaseItem * ItemModel::editItem()
+{
+	return m_editedItem;
+}
+;
 
 void ItemModel::loadData(int type, QVariant id) {
 	// Фабрика

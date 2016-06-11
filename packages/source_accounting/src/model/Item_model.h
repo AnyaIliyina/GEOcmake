@@ -47,6 +47,8 @@ public:
 	bool save();
 	bool cancel();
 
+	BaseItem* editItem();
+
 	void loadData(int type, QVariant id = QVariant());
 
 signals:

@@ -69,15 +69,17 @@ void MainWindow::slotSelectRegionSite(int id)
 		treeSites->expandAll();
 		QList<int> IDs = SiteRegion::regionsBySite(id);
 		for (int i = 0; i < map.count(); i++)
-			map.values().at(i)->setChecked(false);
+			map.values().at(i)->setChecked(Qt::Unchecked);
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeSites->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
-				map.value(IDs.at(i))->setChecked(true);
+				map.value(IDs.at(i))->setChecked(Qt::Checked);
 			}
 		}
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->update();
 	}
 }
 
@@ -97,17 +99,18 @@ void MainWindow::slotSelectRegionDepartment(int id)
 		QList<int> IDs = DepartmentRegion::regionsByDepartment(id);
 		//map = RegionItemChecked::getMap();
 		for (int i = 0; i < map.count(); i++)
-			map.values().at(i)->setChecked(false);
+			map.values().at(i)->setChecked(Qt::Unchecked);
 
 		for (int i = 0; i < IDs.count(); i++)
 		{
 			treeDepartments->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
-				map.value(IDs.at(i))->setChecked(true);
+				map.value(IDs.at(i))->setChecked(Qt::Checked);
 			}
 		}
-
+		for (int i = 0; i < map.count(); i++)
+			map.values().at(i)->update();
 	}
 }
 
@@ -311,7 +314,7 @@ void MainWindow::slotEditCheckSite(int id, bool saveChanges)
 				int region_id = map.keys().at(i);
 				SiteRegion *site_reg = new SiteRegion(id, region_id);
 
-				if (map.values().at(i)->isChecked())	//галочку поставили
+				if (map.values().at(i)->checkState() == Qt::Checked)	//галочку поставили
 					site_reg->insertIntoDatabase();
 				else
 					site_reg->deleteRecord();
@@ -334,6 +337,7 @@ void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QI
 {
 	auto index = treeDepartments->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
+//	QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
 	treeDepartments->edit(index);
 }
 
@@ -351,7 +355,7 @@ void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 				int region_id = map.keys().at(i);
 
 				DepartmentRegion *dep_reg = new DepartmentRegion(id, region_id);
-				if (map.values().at(i)->isChecked())	//галочку поставили
+				if (map.values().at(i)->checkState() == Qt::Checked)	//галочку поставили
 					dep_reg->insertIntoDatabase();
 				else
 					dep_reg->deleteRecord();
@@ -392,4 +396,11 @@ void MainWindow::slotUncheckTreeDepartments()
 	treeDepartments->expandAll();
 	for (int i = 0; i < map.count(); i++)
 		map.values().at(i)->setChecked(false);
+}
+
+void MainWindow::slotSetTreesFocused()
+{
+	qDebug() << "focus";
+	treeDepartments->clearFocus();
+	treeDepartments->setFocus();
 }
