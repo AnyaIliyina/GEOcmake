@@ -68,9 +68,16 @@ public:
 	\return false - значение m_checked не изменилось*/
 	bool save() Q_DECL_OVERRIDE;
 
-	/*! Присваивает полю m_checked всех айтемов значение false*/
+	/*! Присваивает полю m_checked всех айтемов значение Qt::Unchecked*/
 	void uncheckAll();
-	void update();
+
+	/*! Меняет значение m_checked в зависимости от состояния потомков
+	\return true - m_checked изменено
+	\return false - m_checked не изменено*/
+	bool update();
+
+	/**/
+	void updateParents();
 
 //	QList<RegionItemChecked*> children();
 

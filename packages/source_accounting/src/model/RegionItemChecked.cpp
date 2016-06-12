@@ -58,11 +58,14 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 		return false;
 	if (role == Qt::CheckStateRole || Qt::EditRole)		//  Qt::CheckStateRole
 	{
-			m_checked = (Qt::CheckState)value.toInt();
-			checkChildren(this, m_checked);
-			dynamic_cast<RegionItemChecked*>(m_parent)->update();
+		m_checked = (Qt::CheckState)value.toInt();
+		checkChildren(this, m_checked);
+		auto parent = dynamic_cast<RegionItemChecked*>(m_parent);
+			while (parent->update()) {
+				parent = dynamic_cast<RegionItemChecked*>(parent->m_parent);
+					}
+		return true;
 	}
-	return true;
 }
 
 
@@ -103,21 +106,26 @@ void RegionItemChecked::uncheckAll()
 	checkChildren(rootItem(), false);
 }
 
-void RegionItemChecked::update()
+bool RegionItemChecked::update()
 {
+	if (this->id == -1)						// root item
+		return false;
 	if (!this->hasChildren())
-		return;
-	this->m_checked = Qt::Unchecked;
-	int checkedChild_counter = 0;
+		return false;
+	int old = m_checked;
+	m_checked = Qt::Unchecked;
+	int counter_checkedChild = 0;
 	for (int i = 0; i < this->m_children.count(); i++)
 	{
 		auto child = dynamic_cast<RegionItemChecked*>(this->m_children.at(i));
 		if (child->m_checked == Qt::Checked)
-			checkedChild_counter++;
+			counter_checkedChild++;
 	}
 	
-	if (checkedChild_counter > 0)
-		m_checked = (checkedChild_counter == this->m_children.count()) ? Qt::Checked : Qt::PartiallyChecked;
+	if (counter_checkedChild > 0)
+		m_checked = (counter_checkedChild == this->m_children.count()) ? Qt::Checked : Qt::PartiallyChecked;
+	qDebug() << "update result: " << (old != m_checked);
+	return old != m_checked;
 }
 
 //QList<RegionItemChecked*> RegionItemChecked::children()

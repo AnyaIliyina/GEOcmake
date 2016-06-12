@@ -339,6 +339,7 @@ void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QI
 	m_regionsChecked->startEditMode(index);
 //	QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
 	treeDepartments->edit(index);
+	
 }
 
 void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
