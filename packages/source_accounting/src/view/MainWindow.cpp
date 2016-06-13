@@ -36,7 +36,6 @@ void MainWindow::slotConfigure()
 	m_tr = new TreeRegions();
 
 	QObject::connect(m_tr, SIGNAL(dataChanged()), SLOT(slotSetupRegionsModel()));
-	//QObject::connect(m_tr, SIGNAL(dataChanged()), m_tr, SLOT(refreshModel()));
 	QObject::connect(m_tr, SIGNAL(newModelReady()), SLOT(slotSetTreeSearch()));
 	setSearchResources();
 	setResourcesView();
@@ -296,6 +295,7 @@ void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSel
 	auto index = treeSites->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
 	treeSites->edit(index);
+	treeSites->setFocus();
 }
 
 void MainWindow::slotEditCheckSite(int id, bool saveChanges)

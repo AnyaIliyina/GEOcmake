@@ -217,8 +217,7 @@ bool Site::createTable()
 		url     TEXT    UNIQUE NOT NULL,\
 		name TEXT UNIQUE NOT NULL,\
 		status_id INTEGER,		\
-		comment TEXT,   \
-		FOREIGN KEY(status_id) REFERENCES statuses(id) ON UPDATE CASCADE ON DELETE CASCADE\
+		comment TEXT   \
 		)"
 		)) )
 	{
