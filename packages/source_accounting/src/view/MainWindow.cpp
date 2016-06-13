@@ -36,6 +36,8 @@ void MainWindow::slotConfigure()
 	m_tr = new TreeRegions();
 
 	QObject::connect(m_tr, SIGNAL(dataChanged()), SLOT(slotSetupRegionsModel()));
+	//QObject::connect(m_tr, SIGNAL(dataChanged()), m_tr, SLOT(refreshModel()));
+	QObject::connect(m_tr, SIGNAL(newModelReady()), SLOT(slotSetTreeSearch()));
 	setSearchResources();
 	setResourcesView();
 	setDepartamentView();
@@ -146,12 +148,7 @@ void MainWindow::showMW()
 void MainWindow::setSearchResources()
 {
 	treeSearch = new QTreeView();
-	treeSearch->setMaximumWidth(400);
-	treeSearch->setModel(m_tr->model());
-	treeSearch->setColumnHidden(1, true);
-	treeSearch->setColumnHidden(2, true);
-	treeSearch->resizeColumnToContents(0);
-	treeSearch->expandAll();
+	slotSetTreeSearch();
 	tableSites = new QTableView();
 	tableDepartments = new QTableView();
 	search = new QWidget();
@@ -227,6 +224,7 @@ void MainWindow::slotSetupRegionsModel()
 {
 	treeSites->setModel(NULL);
 	treeDepartments->setModel(NULL);
+	
 
 	m_regionsChecked->loadData(ItemTypes::RegionItemCheckedType);
 
@@ -339,7 +337,8 @@ void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QI
 	m_regionsChecked->startEditMode(index);
 //	QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
 	treeDepartments->edit(index);
-	
+	//treeDepartments->selectionModel()->reset();
+	//treeDepartments->selectionModel()->select(index);
 }
 
 void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
@@ -404,4 +403,16 @@ void MainWindow::slotSetTreesFocused()
 	qDebug() << "focus";
 	treeDepartments->clearFocus();
 	treeDepartments->setFocus();
+}
+
+void MainWindow::slotSetTreeSearch()
+{
+	treeSearch->setModel(NULL);
+
+	treeSearch->setMaximumWidth(400);
+	treeSearch->setModel(m_tr->model());
+	treeSearch->setColumnHidden(1, true);
+	treeSearch->setColumnHidden(2, true);
+	treeSearch->resizeColumnToContents(0);
+	treeSearch->expandAll();
 }

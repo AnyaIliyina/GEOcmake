@@ -111,23 +111,26 @@ bool RegionItem::save() {
 		QSqlQuery query(db);
 		if (m_id == 0) {
 			// Вставка нового региона 
-			Region *r = new Region();
-			query.prepare("INSERT INTO regions( "
+			/*query.prepare("INSERT INTO regions( "
 				" comment, name, parent_id "
 				" ) VALUES( "
 				" :comment, :name, :parent_id "
 				" ) "
-				);
-			RegionItem * parentGroup = static_cast<RegionItem*>(m_parent);
-			query.bindValue(":comment", m_comment);
+				);*/
+			RegionItem * parentItem = static_cast<RegionItem*>(m_parent);
+			Region *r = new Region(parentItem->m_id, m_name, m_comment);
+			r->insertIntoDatabase();
+			m_id = r->id();
+			delete r;
+			/*query.bindValue(":comment", m_comment);
 			query.bindValue(":name", m_name);
-			query.bindValue(":parent_id", parentGroup->m_id == 0 ? 0 : parentGroup->m_id);
+			query.bindValue(":parent_id", parentItem->m_id == 0 ? 0 : parentItem->m_id);
 			if (!query.exec())
 				qDebug() << "Не удалось добавить новую группу ИТГИ." << query.lastError().text();
 			if (query.next()) {
 				qDebug() << "получилось";
 				m_id = query.lastInsertId().toInt();
-			}
+			}*/
 		}
 		else {
 			// Изменение 

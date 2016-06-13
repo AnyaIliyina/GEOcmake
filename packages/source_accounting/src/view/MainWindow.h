@@ -151,6 +151,8 @@ private slots:
 	void slotUncheckTreeDepartments();
 
 	void slotSetTreesFocused();
+
+	void slotSetTreeSearch();
 };
 
 

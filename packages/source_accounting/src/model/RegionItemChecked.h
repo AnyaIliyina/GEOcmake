@@ -76,11 +76,6 @@ public:
 	\return false - m_checked не изменено*/
 	bool update();
 
-	/**/
-	void updateParents();
-
-//	QList<RegionItemChecked*> children();
-
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
 	\param RegionItemChecked* parent - элемент
@@ -93,6 +88,4 @@ private:
 	static QMap<int, RegionItemChecked*> map;	// QMap вида <"m_id региона", "указатель на item региона">
 	
 	RegionItemChecked* rootItem();	
-//signals:
-//	void signalChanged();
 };

@@ -88,10 +88,11 @@ bool Region::insertIntoDatabase(int session_id)
 	query.prepare("INSERT INTO regions (parent_id, name, comment)\
 		VALUES (?, ?, ?)");
 	query.addBindValue(m_parent_id);
+	qDebug() << "n_parent_id: " << m_parent_id;
 	query.addBindValue(m_name);
 	query.addBindValue(m_comment);
 	if (!query.exec()) {
-		qDebug() << "Region::insertIntoDatabase():  error inserting into table Departments";
+		qDebug() << "Region::insertIntoDatabase():  error inserting into table Regions";
 		QString errorString = query.lastError().text();
 		qDebug() << errorString;
 		db.close();

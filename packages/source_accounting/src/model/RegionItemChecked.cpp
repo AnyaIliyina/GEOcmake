@@ -124,16 +124,9 @@ bool RegionItemChecked::update()
 	
 	if (counter_checkedChild > 0)
 		m_checked = (counter_checkedChild == this->m_children.count()) ? Qt::Checked : Qt::PartiallyChecked;
-	qDebug() << "update result: " << (old != m_checked);
 	return old != m_checked;
 }
 
-//QList<RegionItemChecked*> RegionItemChecked::children()
-//{
-//	QList<RegionItemChecked*> list;
-//	list << this->children();
-//	return list;
-//}
 
 void RegionItemChecked::checkChildren(RegionItemChecked * parent, int newCheckState)
 {

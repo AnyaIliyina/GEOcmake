@@ -67,7 +67,7 @@ void TreeRegions::slotEnableButtons()
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
 		ui->action_NewRoot->setEnabled(false);
-		ui->action_Yes->setEnabled(true);
+		ui->action_Yes->setEnabled(m_model->allowSave());
 		ui->action_No->setEnabled(true);
 	}
 	else
@@ -90,6 +90,12 @@ void TreeRegions::slotEnableButtons()
 	}
 }
 
+void TreeRegions::refreshModel()
+{
+	setupModel();
+	emit newModelReady();
+}
+
 
 void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection &)
 {
@@ -99,7 +105,7 @@ void TreeRegions::slotEnableButtons(const QItemSelection &, const QItemSelection
 		ui->action_Delete->setEnabled(false);
 		ui->action_New->setEnabled(false);
 		ui->action_NewRoot->setEnabled(false);
-		ui->action_Yes->setEnabled(true);
+		ui->action_Yes->setEnabled(m_model->allowSave());
 		ui->action_No->setEnabled(true);
 	
 	}
@@ -181,6 +187,7 @@ void TreeRegions::slotSave()
 		emit signalChangeEditMode();
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		emit dataChanged();
+		refreshModel();
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);

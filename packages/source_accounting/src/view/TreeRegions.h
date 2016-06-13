@@ -86,6 +86,7 @@ private slots:
      void slotEnableButtons(const QItemSelection &, const QItemSelection &);
 	 void slotEnableButtons();
 
+	 void refreshModel();
 	 
  signals:
 	 /*!
@@ -98,5 +99,5 @@ private slots:
 	 */
 	 void dataChanged();
 
-	 
+	 void newModelReady();	 
 };
