@@ -2,8 +2,8 @@
 #include "RegionItemChecked.h"
 #include "SiteRegion.h"
 
-
-
+#include <QApplication>
+#include <QMouseEvent>
 #include <QDebug>
 #include <QSqlError>
 #include <QSqlDatabase> 
@@ -64,7 +64,7 @@ bool RegionItemChecked::setData(int column, const QVariant& value, int role)
 			while (parent->update()) {
 				parent = dynamic_cast<RegionItemChecked*>(parent->m_parent);
 					}
-		
+			
 		return true;
 	}
 }

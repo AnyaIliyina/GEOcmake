@@ -107,6 +107,7 @@ include_directories (
 	${Qt5Widgets_INCLUDE_DIRS}
 	${Qt5Sql_INCLUDE_DIRS}
 	${Qt5Network_INCLUDE_DIRS}
+	${Qt5Testlib_INCLUDE_DIRS}
 )
 
 set(GUI_TYPE WIN32)

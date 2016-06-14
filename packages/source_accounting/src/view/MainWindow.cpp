@@ -11,6 +11,8 @@
 #include <QDebug>
 #include <QStatusBar>
 #include <QDockWidget>
+#include <QAbstractScrollArea>
+#include <QTest>
 
 
 MainWindow::MainWindow(QMainWindow *parent)
@@ -295,7 +297,9 @@ void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSel
 	auto index = treeSites->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
 	treeSites->edit(index);
-	treeSites->setFocus();
+	//treeSites->setFocus();
+	//m_vs->grabMouse();
+	treeSites->grabMouse();
 }
 
 void MainWindow::slotEditCheckSite(int id, bool saveChanges)
@@ -334,12 +338,15 @@ void MainWindow::slotGetCheckDepartment()
 void MainWindow::slotMakeCheckEditbleDepartment(const QItemSelection &, const QItemSelection &)
 {
 	auto index = treeDepartments->selectionModel()->currentIndex();
+	QTimer *m_dataTimer = new QTimer();
+	m_dataTimer->setSingleShot(true);
+	qDebug() << "timer";
+	QObject::connect(m_dataTimer, SIGNAL(timeout()), this, SLOT(slotSetTreesFocused()));
+	m_dataTimer->start(0);
 	m_regionsChecked->startEditMode(index);
-//	QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
+	//QObject::connect(m_regionsChecked->editItem(), SIGNAL(signalChanged()), this, SLOT(slotSetTreesFocused()));
 	treeDepartments->edit(index);
-	//treeDepartments->selectionModel()->reset();
-	//treeDepartments->selectionModel()->select(index);
-}
+	}
 
 void MainWindow::slotEditCheckDepartment(int id, bool saveChanges)
 {
@@ -401,8 +408,11 @@ void MainWindow::slotUncheckTreeDepartments()
 void MainWindow::slotSetTreesFocused()
 {
 	qDebug() << "focus";
+	m_vd->grabMouse();
+	/*QMouseEvent event = QMouseEvent(QEvent::MouseMove, QPoint(1000, 1000), Qt::NoButton, Qt::NoButton, Qt::NoModifier);
+	QApplication::sendEvent(qApp->focusWidget(), &event);
 	treeDepartments->clearFocus();
-	treeDepartments->setFocus();
+	treeDepartments->setFocus();*/
 }
 
 void MainWindow::slotSetTreeSearch()
