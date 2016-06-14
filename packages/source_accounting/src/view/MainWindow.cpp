@@ -13,6 +13,7 @@
 #include <QDockWidget>
 #include <QAbstractScrollArea>
 #include <QTest>
+#include <QPushButton>
 
 
 MainWindow::MainWindow(QMainWindow *parent)
@@ -408,7 +409,9 @@ void MainWindow::slotUncheckTreeDepartments()
 void MainWindow::slotSetTreesFocused()
 {
 	qDebug() << "focus";
-	m_vd->grabMouse();
+	//QPushButton *button = new QPushButton("testPushButton", this);
+	//connect(button, SIGNAL(clicked()), this, SLOT(clickedButton()));
+	QTest::mouseMove(m_vd, QPoint(800,250), 3);
 	/*QMouseEvent event = QMouseEvent(QEvent::MouseMove, QPoint(1000, 1000), Qt::NoButton, Qt::NoButton, Qt::NoModifier);
 	QApplication::sendEvent(qApp->focusWidget(), &event);
 	treeDepartments->clearFocus();

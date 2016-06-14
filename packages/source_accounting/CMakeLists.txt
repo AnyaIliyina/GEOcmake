@@ -13,6 +13,7 @@ find_package(Qt5Gui  REQUIRED)
 find_package(Qt5Widgets  REQUIRED)
 find_package(Qt5Sql  REQUIRED)
 find_package(Qt5Network  REQUIRED)
+find_package(Qt5Test  REQUIRED)
 
 # Формирование списка заголовочных файлов
 set(SRC_H
@@ -107,7 +108,7 @@ include_directories (
 	${Qt5Widgets_INCLUDE_DIRS}
 	${Qt5Sql_INCLUDE_DIRS}
 	${Qt5Network_INCLUDE_DIRS}
-	${Qt5Testlib_INCLUDE_DIRS}
+	${Qt5Test_INCLUDE_DIRS}
 )
 
 set(GUI_TYPE WIN32)
@@ -127,13 +128,13 @@ add_executable(${PRJ_NAME}  ${SRC_H} ${_UI} ${SRC_C} ${SRC_RES})
 if(MSVC)
 target_link_libraries(
 	${PRJ_NAME}
-	Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Network
+	Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Network Qt5::Test 
 )
 
 else()
 target_link_libraries(
 	${PRJ_NAME}
-	Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Network
+	Qt5::Core Qt5::Gui Qt5::Widgets Qt5::Sql Qt5::Network Qt5::Test
 )
 endif()
 
