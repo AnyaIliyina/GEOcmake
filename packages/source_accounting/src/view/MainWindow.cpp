@@ -298,9 +298,7 @@ void MainWindow::slotMakeCheckEditbleSite(const QItemSelection &, const QItemSel
 	auto index = treeSites->selectionModel()->currentIndex();
 	m_regionsChecked->startEditMode(index);
 	treeSites->edit(index);
-	//treeSites->setFocus();
-	//m_vs->grabMouse();
-	treeSites->grabMouse();
+	treeSites->setFocus();
 }
 
 void MainWindow::slotEditCheckSite(int id, bool saveChanges)
@@ -409,9 +407,10 @@ void MainWindow::slotUncheckTreeDepartments()
 void MainWindow::slotSetTreesFocused()
 {
 	qDebug() << "focus";
-	//QPushButton *button = new QPushButton("testPushButton", this);
-	//connect(button, SIGNAL(clicked()), this, SLOT(clickedButton()));
-	QTest::mouseMove(m_vd, QPoint(800,250), 3);
+	for (int i = 0; i < map.count(); i++)
+		map.values().at(i)->update();
+	
+	//QTest::mouseMove(m_vd, QPoint(800,250), 3);
 	/*QMouseEvent event = QMouseEvent(QEvent::MouseMove, QPoint(1000, 1000), Qt::NoButton, Qt::NoButton, Qt::NoModifier);
 	QApplication::sendEvent(qApp->focusWidget(), &event);
 	treeDepartments->clearFocus();

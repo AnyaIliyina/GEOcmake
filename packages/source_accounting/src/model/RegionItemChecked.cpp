@@ -158,9 +158,9 @@ QList<BaseItem*> RegionItemChecked::loadItemsFromDb(QVariant id)
 	if (!query.exec(
 		"WITH RECURSIVE tree(id, name, comment, parent_id, depth) AS \
 		(\
-			SELECT id, name, comment, 0 AS parent_id, 1 AS depth \
+			SELECT id, name, comment, NULL AS parent_id, 1 AS depth \
 			 FROM regions \
-				WHERE parent_id IS 0 \
+				WHERE parent_id IS NULL \
 			UNION ALL\
 			SELECT r.id, r.name, r.comment, r.parent_id, tr.depth+1 AS depth\
 			 FROM regions r, tree tr\
