@@ -44,7 +44,7 @@ private:
 	bool m_editMode = false;
 	ComboDelegate *comboDelegateLanguage;
 	ComboDelegate *comboDelegateGPI;
-
+	int value;
 	/*!
 	Метод для настройки таблицы 
 	*/

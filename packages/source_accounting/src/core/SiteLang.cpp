@@ -108,8 +108,6 @@ bool SiteLang::createTable()
 	}
 	db.close();
 
-	SiteLang(1, 1).insertIntoDatabase();
-	SiteLang(2, 1).insertIntoDatabase();
-	SiteLang(3, 2).insertIntoDatabase();
+	
 	return true;
 }

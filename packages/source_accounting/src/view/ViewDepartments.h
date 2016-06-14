@@ -41,7 +41,7 @@ private:
 	Ui::ViewDepartments *ui;
 	ItemModel* m_model=nullptr;
 	bool m_editMode = false;
-	
+	int value;
 
 	 /*!
 	 Метод для настройки таблицы 

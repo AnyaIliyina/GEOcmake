@@ -37,7 +37,6 @@ bool SiteRegion::createTable()
 		return false;
 	}
 	db.close();
-	SiteRegion(1, 1).insertIntoDatabase();
 	return true;
 }
 

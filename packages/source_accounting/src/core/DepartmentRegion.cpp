@@ -71,7 +71,6 @@ bool DepartmentRegion::createTable()
 		return false;
 	}
 	db.close();
-	DepartmentRegion(1, 1).insertIntoDatabase();
 	return true;
 }
 

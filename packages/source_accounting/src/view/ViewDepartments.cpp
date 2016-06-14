@@ -107,7 +107,7 @@ void ViewDepartments::slotSelectionChanged(const QItemSelection& selected, const
 		{
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
-			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
@@ -174,7 +174,7 @@ void ViewDepartments::slotSave()
 	if (m_model->save())
 	{
 		m_editMode = false;
-		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		//int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		

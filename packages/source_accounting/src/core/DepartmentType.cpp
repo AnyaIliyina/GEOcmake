@@ -49,7 +49,6 @@ bool DepartmentType::createTable()
 		return false;
 	}
 	db.close();
-	DepartmentType(1, 1).insertIntoDatabase();
 	return true;
 }
 

@@ -133,7 +133,7 @@ void ViewSites::slotSave()
 	{
 		
 		m_editMode = false;
-		int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		//int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		
@@ -213,7 +213,7 @@ void ViewSites::slotSelectionChanged(const QItemSelection & selected, const QIte
 			ui->action_Delete->setEnabled(true);
 			ui->action_Edit->setEnabled(true);
 			ui->action_OpenUrl->setEnabled(true);
-			int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 			emit valueSelected(value);
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
