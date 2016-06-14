@@ -82,14 +82,19 @@ void ViewSites::slotAdd()
 	emit signalNewSite();
 	QModelIndex index;
 	m_model->insertRows(0, 1, index);
+
 	ui->tableView->resizeRowsToContents();
+
 	auto rowCount = m_model->rowCount(index);
 	auto child = m_model->index(rowCount - 1, 0, index); 
 
 	m_editMode = true;
 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
+	ui->tableView->selectRow(rowCount - 1);
+	value = -1;
 	ui->tableView->edit(child);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 void ViewSites::slotDelete()
@@ -118,6 +123,7 @@ void ViewSites::slotEdit()
 	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 
 }
 
@@ -133,7 +139,8 @@ void ViewSites::slotSave()
 	{
 		
 		m_editMode = false;
-		//int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		if (value<0)
+			 value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		
@@ -142,6 +149,7 @@ void ViewSites::slotSave()
 	{
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	slotSelectionChanged(QItemSelection(), QItemSelection());
 }
@@ -156,6 +164,7 @@ void ViewSites::slotCancel()
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->reset();
 	ui->tableView->selectionModel()->setCurrentIndex(index, QItemSelectionModel::Select |
@@ -215,6 +224,7 @@ void ViewSites::slotSelectionChanged(const QItemSelection & selected, const QIte
 			ui->action_OpenUrl->setEnabled(true);
 			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 			emit valueSelected(value);
+
 		}
 		if (ui->tableView->selectionModel()->selectedRows().count() == 0)
 		{

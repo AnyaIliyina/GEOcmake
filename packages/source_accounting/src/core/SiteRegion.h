@@ -53,5 +53,7 @@ public:
 
 	/*! Создает таблицу site_regions*/
 	static bool createTable();
+
+	static void deleteBySite(int site_id);
 };
 

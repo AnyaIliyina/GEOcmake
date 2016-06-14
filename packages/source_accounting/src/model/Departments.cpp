@@ -28,6 +28,7 @@ void Departments::removeChild(BaseItem* child) {
 	Departments* department = dynamic_cast<Departments*>(child);
 	if (department == NULL)
 		return;
+			
 			Department::deleteDepartment(department->m_id);
 	m_children.removeOne(child);
 };

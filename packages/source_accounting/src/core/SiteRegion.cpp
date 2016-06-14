@@ -19,6 +19,21 @@ void SiteRegion::deleteRecord(int session_id)
 	}
 }
 
+void SiteRegion::deleteBySite(int site_id)
+{
+	QSqlDatabase db = Database::database();
+	QSqlQuery query(db);
+	query.prepare("DELETE FROM site_regions WHERE site_id =?");
+	query.addBindValue(site_id);
+	if (!query.exec())
+	{
+		qDebug() << "SiteRegions::deleteBySite(int site_id) error";
+		qDebug() << query.lastError().text();
+		db.close();
+	}
+	db.close();
+}
+
 bool SiteRegion::createTable()
 {
 	QSqlDatabase db = Database::database();

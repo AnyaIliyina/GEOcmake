@@ -132,7 +132,10 @@ void ViewDepartments::slotAdd()
 	m_editMode = true;
 
 	ui->tableView->selectionModel()->setCurrentIndex(child, QItemSelectionModel::SelectCurrent);
+	ui->tableView->selectRow(rowCount - 1);
+	value = -1;
 	ui->tableView->edit(child);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 void ViewDepartments::slotDelete()
@@ -161,6 +164,7 @@ void ViewDepartments::slotEdit()
 	ui->tableView->resizeRowsToContents();
 	m_model->startEditMode(index);
 	ui->tableView->edit(index);
+	ui->tableView->setSelectionMode(QAbstractItemView::NoSelection);
 }
 
 void ViewDepartments::slotSave()
@@ -174,7 +178,8 @@ void ViewDepartments::slotSave()
 	if (m_model->save())
 	{
 		m_editMode = false;
-		//int value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
+		if (value<0)
+			value = m_model->data(ui->tableView->selectionModel()->selectedRows()[0], Qt::UserRole).toInt();
 		emit signalSave(value, true);
 		QMessageBox::information(this, "", "Сохранено", QMessageBox::Ok);
 		
@@ -183,6 +188,7 @@ void ViewDepartments::slotSave()
 	{
 		QMessageBox::critical(this, "", "Не удалось применить изменения", QMessageBox::Ok);
 	}
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	slotSelectionChanged(QItemSelection(), QItemSelection());
 }
@@ -196,6 +202,7 @@ void ViewDepartments::slotCancel()
 	}
 	else
 		QMessageBox::critical(this, "", "Не удалось отменить изменения", QMessageBox::Ok);
+	ui->tableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
 	auto index = ui->tableView->selectionModel()->currentIndex();
 	ui->tableView->reset();
 	ui->tableView->selectionModel()->setCurrentIndex(index, QItemSelectionModel::Select |

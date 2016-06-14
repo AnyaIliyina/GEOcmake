@@ -6,6 +6,7 @@
 #include "GeodataType.h"
 #include "SiteLang.h"
 #include "SiteType.h"
+#include "SiteRegion.h"
 #include <QBrush>
 #include <QDebug>
 #include <QPixmap>
@@ -31,7 +32,9 @@ void Resources::removeChild(BaseItem* child) {
 	Resources* resource = dynamic_cast<Resources*>(child);
 	if (resource == NULL)
 		return;
-
+		SiteType::deleteBySite(resource->m_id);
+		SiteLang::deleteBySite(resource->m_id);
+		SiteRegion::deleteBySite(resource->m_id);
 		Site::deleteRecord(resource->m_id);
 	m_children.removeOne(child);
 };
