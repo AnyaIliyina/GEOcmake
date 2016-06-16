@@ -76,7 +76,7 @@ void MainWindow::slotSelectRegionSite(int id)
 			map.values().at(i)->setChecked(Qt::Unchecked);
 		for (int i = 0; i < IDs.count(); i++)
 		{
-			treeSites->setFocus();
+			//treeSites->setFocus();
 			if (map.contains(IDs.at(i)))
 			{
 				map.value(IDs.at(i))->setChecked(Qt::Checked);
@@ -407,9 +407,7 @@ void MainWindow::slotUncheckTreeDepartments()
 void MainWindow::slotSetTreesFocused()
 {
 	qDebug() << "focus";
-	for (int i = 0; i < map.count(); i++)
-		map.values().at(i)->update();
-	
+	//m_vd->setMouseTracking(false);
 	//QTest::mouseMove(m_vd, QPoint(800,250), 3);
 	/*QMouseEvent event = QMouseEvent(QEvent::MouseMove, QPoint(1000, 1000), Qt::NoButton, Qt::NoButton, Qt::NoModifier);
 	QApplication::sendEvent(qApp->focusWidget(), &event);

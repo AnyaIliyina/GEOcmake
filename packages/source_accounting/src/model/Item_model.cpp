@@ -14,8 +14,10 @@ ItemModel::~ItemModel() {
 	m_editedItem = NULL;
 };
 
+
 ItemModel::ItemModel() : QAbstractItemModel() {
 };
+
 
 int ItemModel::rowCount(const QModelIndex& parent) const {
 	BaseItem* parentItem;
@@ -31,6 +33,7 @@ int ItemModel::rowCount(const QModelIndex& parent) const {
 	return parentItem->rowCount();
 };
 
+
 int ItemModel::columnCount(const QModelIndex& parent) const {
 	BaseItem* parentItem;
 
@@ -41,6 +44,7 @@ int ItemModel::columnCount(const QModelIndex& parent) const {
 	
 	return parentItem->columnCount();
 };
+
 
 bool ItemModel::hasChildren(const QModelIndex& parent) const {
 	BaseItem* parentItem;
@@ -53,6 +57,7 @@ bool ItemModel::hasChildren(const QModelIndex& parent) const {
 	return parentItem->hasChildren();
 	return false;
 };
+
 
 QModelIndex ItemModel::index(int row, int column, const QModelIndex& parent) const {
 	if (!hasIndex(row, column, parent))
@@ -106,13 +111,15 @@ QVariant ItemModel::data(const QModelIndex& index, int role) const {
 bool ItemModel::setData(const QModelIndex& index, const QVariant& value, int role) {
 	if (!index.isValid())
 		return false;
-
 	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
-
+	if (role == Qt::CheckStateRole)
+	{
+			children_emitDataChanged(index);
+			someParents_emitDataChanged(index.parent());
+	}
+		
 	bool res = item->setData(index.column(), value, role);
-
 	emit indexStatusChanged(index);
-	
 	return res;
 };
 
@@ -232,6 +239,7 @@ bool ItemModel::save() {
 	return true;
 };
 
+
 bool ItemModel::cancel() {
 	if (m_editedItem == NULL)
 		return false;
@@ -260,6 +268,42 @@ bool ItemModel::cancel() {
 
 	return true;
 }
+
+
+
+void ItemModel::someParents_emitDataChanged(const QModelIndex & index)
+{
+	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
+	QModelIndex p_index = index;
+	while(item->update()) {
+		emit dataChanged(index, index);
+		item = item->parent();
+		p_index = p_index.parent();
+	}
+	/*QModelIndex p_index = index.parent();
+	emit dataChanged(p_index, p_index);
+	while (parent->update())
+	{
+		someParents_emitDataChanged(p_index);
+	}*/
+}
+
+
+void ItemModel::children_emitDataChanged(const QModelIndex & index)
+{
+	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
+	emit dataChanged(index, index);
+	if (item->hasChildren())
+	{
+		emit dataChanged(index.child(0, 0), index.child(0, item->rowCount()-1));
+		for (int i = 0; i < item->rowCount(); i++)
+		{
+			children_emitDataChanged(index.child(0, i));
+		}
+	}
+}
+
+
 BaseItem * ItemModel::editItem()
 {
 	return m_editedItem;

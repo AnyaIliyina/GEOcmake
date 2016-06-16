@@ -74,7 +74,7 @@ public:
 	/*! Меняет значение m_checked в зависимости от состояния потомков
 	\return true - m_checked изменено
 	\return false - m_checked не изменено*/
-	bool update();
+	bool update() Q_DECL_OVERRIDE;
 
 private:
 	/*! Присваивает потомкам элемента parent новое значение m_checked
