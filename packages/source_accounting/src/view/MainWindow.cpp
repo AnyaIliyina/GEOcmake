@@ -11,9 +11,8 @@
 #include <QDebug>
 #include <QStatusBar>
 #include <QDockWidget>
-#include <QAbstractScrollArea>
-#include <QTest>
-#include <QPushButton>
+
+
 
 
 MainWindow::MainWindow(QMainWindow *parent)
