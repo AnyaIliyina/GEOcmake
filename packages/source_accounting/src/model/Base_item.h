@@ -45,8 +45,7 @@ public:
 
 	virtual bool save() = 0;
 	virtual bool cancel() = 0;
-	virtual bool update();
-
+	
 	virtual QList<BaseItem*> loadItemsFromDb(QVariant id = QVariant()) = 0;
 
 protected:

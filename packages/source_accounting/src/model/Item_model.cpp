@@ -115,7 +115,7 @@ bool ItemModel::setData(const QModelIndex& index, const QVariant& value, int rol
 	if (role == Qt::CheckStateRole)
 	{
 			children_emitDataChanged(index);
-			someParents_emitDataChanged(index.parent());
+			parents_emitDataChanged(index);
 	}
 		
 	bool res = item->setData(index.column(), value, role);
@@ -271,21 +271,16 @@ bool ItemModel::cancel() {
 
 
 
-void ItemModel::someParents_emitDataChanged(const QModelIndex & index)
+void ItemModel::parents_emitDataChanged(const QModelIndex & index)
 {
 	BaseItem* item = static_cast<BaseItem*>(index.internalPointer());
-	QModelIndex p_index = index;
-	while(item->update()) {
-		emit dataChanged(index, index);
+	item = item->parent();
+	QModelIndex p_index = index.parent();
+	while(item != m_rootItem) {
+		emit dataChanged(p_index, p_index);
 		item = item->parent();
 		p_index = p_index.parent();
 	}
-	/*QModelIndex p_index = index.parent();
-	emit dataChanged(p_index, p_index);
-	while (parent->update())
-	{
-		someParents_emitDataChanged(p_index);
-	}*/
 }
 
 

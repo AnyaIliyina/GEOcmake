@@ -44,8 +44,3 @@ bool BaseItem::isCheckable() const
 {
 	return false;
 }
-bool BaseItem::update()
-{
-	return false;
-}
-;

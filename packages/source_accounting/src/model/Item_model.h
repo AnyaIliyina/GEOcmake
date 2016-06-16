@@ -47,7 +47,7 @@ public:
 	bool save();
 	bool cancel();
 
-	void someParents_emitDataChanged(const QModelIndex& index);
+	void parents_emitDataChanged(const QModelIndex& index);
 	void children_emitDataChanged(const QModelIndex& index);
 
 	BaseItem* editItem();
